@@ -68,7 +68,7 @@ public class SendMessageCommand implements Command {
                     out.println(MessagesServerThread.END_LINE_MESSAGE);
                     result = in.readLine();
                     k++;
-                } while ("OK".equals(result)||k>5);
+                } while ("OK".equals(result)&&!(k>=5));
             } catch (IOException | ParserConfigurationException|NullPointerException e) {
                 LOGGER.error("Send message error" + e.getMessage());
             }finally {
