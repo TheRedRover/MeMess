@@ -37,7 +37,8 @@ public class SendMessageCommand implements Command {
 
     @Override
     public void execute() {
-        if (!panel.getTextMessageField().getText().equals("")&& !panel.getTextMessageField().getText().matches("[\\s]*")) {
+        if (!panel.getTextMessageField().getText().equals("")
+            && !panel.getTextMessageField().getText().matches("[\\s]*")) {
             try {
                 addr = InetAddress.getByName(MessengerApl.getModel().getServerAddress());
                 socket = new Socket(addr, MessengerServer.MAIN_PORT);
