@@ -138,6 +138,7 @@ public class ChatPanelView extends AbstractView {
             sendMessageButton.setBackground(new Color(40,64,92));
             sendMessageButton.setActionCommand(SEND_ACTION_COMMAND);
             sendMessageButton.addActionListener(MessengerApl.getController());
+            sendMessageButton.setEnabled(false);
 
         }
         return sendMessageButton;

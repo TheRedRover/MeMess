@@ -42,13 +42,17 @@ public class Controller implements ActionListener {
         String commandName = e.getActionCommand();
         switch (commandName){
             case RegistrationPanelView.SIGN_UP_ACTION_COMMAND: {
-                RegistrationPanelView view = Utility.findParent((Component) e.getSource(), RegistrationPanelView.class);
+                RegistrationPanelView view = Utility
+                        .findParent((Component) e.getSource(), RegistrationPanelView.class);
                 String pass1 = new String(view.getPasswordField().getPassword());
                 String pass2=new String(view.getRepeatedPasswordField().getPassword());
-                if (!EmailValidator.getInstance().isValid(view.getLoginField().getText()) ||
-                        !InetAddressValidator.getInstance().isValid(view.getServerIPAddressField().getText()) ||
+                if (!EmailValidator.getInstance()
+                        .isValid(view.getLoginField().getText()) ||
+                        !InetAddressValidator.getInstance().isValid(view
+                                .getServerIPAddressField().getText()) ||
                         !pass1.equals(pass2)){
-                    command = new RegistrationErrorCommand(view,"<html><<div style='text-align: center;'>Check entered</div></html>");
+                    command = new RegistrationErrorCommand(view,
+                            "<html><<div style='text-align: center;'>Check entered</div></html>");
                 } else {
                     int k=0;
                     boolean c=false;
@@ -57,14 +61,16 @@ public class Controller implements ActionListener {
                         c=Utility.usersGetAll(getModel());
                         k++;
                         if(k>3) {
-                            command = new RegistrationErrorCommand(view, "<html><<div style='text-align: center;'>Connection error</div></html>");
+                            command = new RegistrationErrorCommand(view,
+                                    "<html><<div style='text-align: center;'>Connection error</div></html>");
                             c = true;
                         }
                     }
                     if(Utility.usersGetAll(getModel())){
                     if(UserParser.getUser(parent.getRegistrationPanelView().getLoginField().getText()
                             , getModel().getUsers())!=null)
-                        command = new RegistrationErrorCommand(view,"<html><<div style='text-align: center;'>Login is used</div></html>");
+                        command = new RegistrationErrorCommand(view,
+                                "<html><<div style='text-align: center;'>Login is used</div></html>");
                     else {
                         command = new SignUpCommand(view);
                     }
@@ -79,9 +85,11 @@ public class Controller implements ActionListener {
                 LoginPanelView view = Utility.findParent((Component) e.getSource(), LoginPanelView.class);
                 String pass = new String(view.getPasswordField().getPassword());
                 if (!EmailValidator.getInstance().isValid(view.getLoginField().getText()) ||
-                        !InetAddressValidator.getInstance().isValid(view.getServerIPAddressField().getText())||
+                        !InetAddressValidator.getInstance()
+                                .isValid(view.getServerIPAddressField().getText())||
                         view.getServerIPAddressField().getText().equals("")||pass.equals("")) {
-                    command = new LoginErrorCommand(view, "<html><<div style='text-align: center;'>Check entered</div></html>");
+                    command = new LoginErrorCommand(view,
+                            "<html><<div style='text-align: center;'>Check entered</div></html>");
                 } else
                     {
                     getModel().setServerAddress(view.getServerIPAddressField().getText());
@@ -107,7 +115,8 @@ public class Controller implements ActionListener {
                                  command = new ShowChatViewCommand(parent, view);
                              }
                          }
-                         else command = new LoginErrorCommand(view,"<html><<div style='text-align: center;'>Check entered</div></html>");
+                         else command = new LoginErrorCommand(view,
+                                 "<html><<div style='text-align: center;'>Check entered</div></html>");
                     }
                 }
                 break;
@@ -121,7 +130,6 @@ public class Controller implements ActionListener {
             case LOGOUT_ACTION_COMMAND: {
                 getModel().getMessages().clear();
                 getModel().setLastMessageID(0);
-                ChatPanelView view = Utility.findParent((Component) e.getSource(),ChatPanelView.class);
                 getModel().getLoggedUser().setName(getModel().getRealNameLoggedUser());
                 getModel().initialise();
                 command = new ShowLoginViewCommand(parent);

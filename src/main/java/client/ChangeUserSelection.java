@@ -17,6 +17,7 @@ public class ChangeUserSelection implements ListSelectionListener {
     public void valueChanged(ListSelectionEvent e) {
         User curUser = view.getUserList().getSelectedValue();
         view.getTextMessageField().setEnabled(true);
+        view.getSendMessageButton().setEnabled(true);
         MessengerApl.getModel().setCurrentUser(curUser);
         Utility.messagesUpdate(AbstractView.parent);
         view.getUserCompanion().setText(view.getUserList().getSelectedValue().toString());
